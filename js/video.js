@@ -41,9 +41,11 @@ document.querySelector("#mute").addEventListener("click", function () {
 //Volume Change
 slider.oninput = function () {
   volume.innerHTML = this.value + "%";
-  video.volume = volume.innerHTML / 100;
+  video.volume = (this.value / 100).toFixed(2);
   console.log("The current value is " + video.volume);
 };
+
+//Skipping the Video by 10 seconds
 
 // document.querySelector("volume", function () {
 //   //   let audioText = document.getElementById("volume");
