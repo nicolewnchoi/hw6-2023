@@ -1,13 +1,14 @@
 var video;
-video = document.getElementById("player1");
 var slider = document.getElementById("slider");
 var volume = document.getElementById("volume");
 
 window.addEventListener("load", function () {
   console.log("Good job opening the window");
-  document.querySelector("#player1").autoplay = false;
-  console.log("Auto play is set to false");
-  console.log("Loop is set to false");
+  video = document.querySelector("#player1");
+  video.autoplay = false;
+  video.loop = false;
+  console.log("Auto play is set to " + video.autoplay);
+  console.log("Loop is set to " + video.loop);
 });
 
 // Playing the video
@@ -45,7 +46,30 @@ slider.oninput = function () {
   console.log("The current value is " + video.volume);
 };
 
+//Slowing the Video
+document.querySelector("#slower").addEventListener("click", function () {
+  console.log("Slow down Video");
+  video.playbackRate = video.playbackRate * 0.9;
+  console.log("Speed is " + video.playbackRate);
+});
+
+//Speeding up the Video
+document.querySelector("#faster").addEventListener("click", function () {
+  console.log("Speeed up Video");
+  video.playbackRate = video.playbackRate * 1.1;
+  console.log("Speed is " + video.playbackRate);
+});
+
 //Skipping the Video by 10 seconds
+document.querySelector("#skip").addEventListener("click", function () {
+  console.log("Skip ahead");
+  if (video.currentTime + 10 > video.duration) {
+    video.currentTime = 0;
+  } else {
+    video.currentTime = video.currentTime + 10;
+  }
+  console.log("Video current time is " + video.currentTime);
+});
 
 // document.querySelector("volume", function () {
 //   //   let audioText = document.getElementById("volume");
@@ -55,8 +79,15 @@ slider.oninput = function () {
 // });
 
 //Old School Style
-// document.querySelector("#vintage").addEventListener("click", function () {
-//   let gray = document.querySelector("oldSchool");
-//   video.style.background = gray;
-//   console.log("Filter applied(?)");
-// });
+document.querySelector("#vintage").addEventListener("click", function () {
+  video.classList.add("oldSchool");
+  // let gray = document.querySelector("oldSchool");
+  // video.style.background = gray;
+  // console.log("Filter applied(?)");
+  // apply class to style
+});
+
+//Revert back to Original Style
+document.querySelector("#orig").addEventListener("click", function () {
+  video.classList.remove("oldSchool");
+});
